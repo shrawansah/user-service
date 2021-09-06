@@ -10,7 +10,7 @@ func main() {
 
 	logger.Info("App Started")
 
-	simplePaylaterService := user.NewSimpleUserService()
-	simplePaylaterService.StartServing()
+	userService := user.NewUserService()
+	userService.StartServing()
 
 }

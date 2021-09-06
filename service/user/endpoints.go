@@ -9,13 +9,12 @@ import (
 	"gojek.com/logger"
 )
 
-
 // CreateUserEndpointHandler
 /**
 User Endpoints Begin
 **/
-func (service simpleUserService) CreateUserEndpointHandler(w http.ResponseWriter, r *http.Request) {
-	
+func (service userService) CreateUserEndpointHandler(w http.ResponseWriter, r *http.Request) {
+
 	w.Header().Set("Content-Type", "application/json")
 	var createUserRequest createuser.CreateUserRequest
 	var response interface{}
@@ -54,6 +53,7 @@ func (service simpleUserService) CreateUserEndpointHandler(w http.ResponseWriter
 
 	w.WriteHeader(http.StatusCreated)
 }
+
 /**
 User Endpoints Ends
 **/

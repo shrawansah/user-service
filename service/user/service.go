@@ -15,28 +15,28 @@ type services interface {
 	StartServing()
 }
 
-type simpleUserService struct {
-	Database           *sql.DB
+type userService struct {
+	Database       *sql.DB
 	UserRepository repository.UsersRepository
 }
 
-func NewSimpleUserService() services {
+func NewUserService() services {
 
 	defer logger.Info("SimpleUserService initialization complete")
 
-	return simpleUserService{
-		Database:           database.GetConnection(),
+	return userService{
+		Database:       database.GetConnection(),
 		UserRepository: repository.NewUsersRepository(database.GetConnection()),
 	}
 }
 
-func (simpleUserService simpleUserService) StartServing() {
+func (userService userService) StartServing() {
 
 	logger.Info("Initializing to serve SimpleUserService")
 	router := mux.NewRouter().StrictSlash(true)
 
 	// user endpoints
-	router.HandleFunc("/user/create", simpleUserService.CreateUserEndpointHandler).Methods("POST")
+	router.HandleFunc("/user/create", userService.CreateUserEndpointHandler).Methods("POST")
 
 	logger.Info("Serving on port 8086")
 	logger.Error(http.ListenAndServe(":8086", router))
